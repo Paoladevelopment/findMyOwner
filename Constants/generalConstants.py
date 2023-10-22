@@ -7,6 +7,14 @@ LIST_ACTIONS = {
     3: Actions.GO_LEFT
 }
 
+COSTS = {
+  0: 1,
+  1: 1,
+  2: -2,
+  3: 3,
+  4: 1
+}
+
 INFO_ENTITIES = {
     0: "Perro cobarde",
     1: "Casilla vacía",
