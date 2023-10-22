@@ -15,3 +15,12 @@ INFO_ENTITIES = {
     4: "Muriel",
     5: "Obstaculo"
 }
+
+INFO_ENTITIES_IMAGES = {
+    0: "findMyOwner\Images\perroCobarde.png",
+    1: "findMyOwner\Images\white.jpg",
+    2: "findMyOwner\Images/abusadorAmo.png",
+    3: "findMyOwner\Images\katz.png",
+    4: "findMyOwner\Images\muriel.png",
+    5: "findMyOwner\Images/black.jpg",
+}
