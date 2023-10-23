@@ -15,7 +15,6 @@ game_board = [
     [1, 5, 1, 5, 5, 5, 1, 1],
     [1, 2, 1, 3, 1, 1, 1, 1],
 ]
-
 ALL_STEPS = {}
 # Needs to be replaced
 
