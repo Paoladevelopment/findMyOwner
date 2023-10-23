@@ -6,8 +6,9 @@ class Node:
         self.action = action
         self.actions = actions
         self.children = []
-        self.cost = 0
-        self.best_child_cost = 0
+        self.cost = 0 #Can vary
+        self.best_child = None
+        self.original_cost = 0
     
     def __str__(self) -> str:
         return self.state
@@ -21,7 +22,8 @@ class Node:
         for action in self.actions:
             new_state = problem.get_sucessor_state(self.state, action)
             child = Node(new_state, self, action, new_state.get_actions())
-            cost = self.cost + problem.cost_action(child.state)
+            cost = self.original_cost + problem.cost_action(child.state)
+            child.original_cost = cost
             child.cost = cost
             self.children.append(child)
     
@@ -40,4 +42,4 @@ class Node:
             if(child_cost < cost_best):
                 best = child
 
-        self.best_child_cost = best.cost
+        self.best_child = best

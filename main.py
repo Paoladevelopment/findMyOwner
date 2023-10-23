@@ -19,5 +19,6 @@ goal_state = State(2, 0, [])
 problem = Problem(initial_state, goal_state, LIST_ACTIONS, game_board, COSTS)
 solution = cu.cost_uniform_recursive(problem)
 print(solution.state.__str__())
+print(solution.father.state.__str__())
 cu.show_solution(solution)
 

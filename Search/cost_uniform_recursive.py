@@ -10,31 +10,97 @@ def cost_uniform_recursive(problem):
     node_root = create_node_root(problem)
     leaf = [node_root]
     visited = set()
-
+    visited_times = {}
     while True:
+
         if not leaf:
             return None
         node = leaf.pop(0)
+        print("current state ", node.state.__str__())
         if problem.is_goal(node.state):
             return node
-        visited.add(node.state.__str__())
+
         if not node.state.get_actions():
             continue
+        
+        print("current leaf:")
+        print([node_print.state.__str__() for node_print in leaf])
+        update_visited_times(node, visited, visited_times)
+        visited.add(node.state.__str__())
 
-        print("current state ", node.state.__str__())
-        childrens_node = node.expand(problem)
-        node.calculate_best_child_cost()
+        print("Nodos visitados " ,visited)
+        new_nodes = node.expand(problem)
+        if(visited_times[node.state.__str__()] > 1):
+            if (node.best_child != None):
+                print("Acá estoy x1")
+                
+                remove_node(new_nodes, node.best_child)
+                nodes_best_child = node.best_child.expand(problem)
+                add_nodes(nodes_best_child, new_nodes, visited)
 
-        print([child_node.state.__str__() for child_node in childrens_node])
-        for child_node in childrens_node:
-            if(child_node.state.__str__() not in visited):
-                leaf.append(child_node)
-
-        leaf.sort(key= lambda node: node.cost)
-        for node in leaf:
-            print(node.state)
+        print("hijos ese nodo")
+        print([new_node.state.__str__() for new_node in new_nodes])
+        update_leaf(node, new_nodes, leaf, visited, visited_times)
+        ordering_leaf(leaf)
+        print("ordered leaf:")
+        print([node_print.state.__str__() for node_print in leaf])
 
 
+#Decides how to update new nodes to the leaf based on two conditions:
+def update_leaf(current_node,nodes, leaf, visited, visited_times):
+    if len(leaf) == 0:
+        add_nodes(nodes, leaf, visited)
+        return
+    next_node = leaf[0]
+    if(should_forget_branch(next_node,nodes) and visited_times[current_node.state.__str__()] <= 1):
+        print("Entré")
+        current_node.calculate_best_child_cost()
+        current_node.cost = current_node.best_child.original_cost
+        current_node.children = []
+        leaf.append(current_node)
+        return
+    
+    add_nodes(nodes, leaf, visited)
+
+
+#Adds new nodes to an existing list of node.
+def add_nodes(new_nodes, nodes, visited):
+    for node in new_nodes:
+        if(not was_visited(node, visited)):
+             nodes.append(node)
+
+#Returns if the cost of the next_node is lower that the costs of children nodes of the current one. 
+def should_forget_branch(next_node, nodes):
+    decision = False
+    for node in nodes:
+        if node.cost >= next_node.cost:
+            decision = True
+            break
+    return decision
+
+
+#Returns if a node has been visited
+def was_visited(node, visited):
+    return node.state.__str__() in visited
+
+#Increments the times of a revisited node. 
+
+def update_visited_times(node, visited, visited_times):
+    if(was_visited(node, visited)):
+        visited_times[node.state.__str__()] +=1
+    else:
+        visited_times[node.state.__str__()] = 1
+
+#Removes a node from the recent created new nodes list
+
+def remove_node(new_nodes, node_to_delete):
+
+    for node in new_nodes:
+        if node_to_delete.state.__str__() == node.state.__str__():
+            new_nodes.remove(node)
+
+
+# Show the solution that el perro cobarde should take to find his owner
 def show_solution(goal):
     if not goal:
         print('There is not solution')
@@ -45,14 +111,19 @@ def show_solution(goal):
     while node:
         msg= "Estado: {0}, Coste Total: {1}"
         state = node.state.__str__()
-        cost_total = node.cost
+        cost_total = node.original_cost
         solution_path.append(msg.format(state, cost_total))
         if node.action:
             action = node.action.value
-            cost_father = node.father.cost
+            cost_father = node.father.original_cost
             msg = "<--- {0} [{1}] --->"
             solution_path.append(msg.format(action, cost_father))
         node = node.father
 
     for step in reversed(solution_path):
         print(step)
+
+
+#Orders a list of nodes in place based on their 'cost' attribute.
+def ordering_leaf(leaf):
+    leaf.sort(key= lambda node: node.cost)
