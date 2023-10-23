@@ -11,7 +11,7 @@ def cost_uniform_recursive(problem):
     leaf = [node_root]
     visited = set()
     visited_times = {}
-    while True:
+    for i in range(43):
 
         if not leaf:
             return None
@@ -23,27 +23,28 @@ def cost_uniform_recursive(problem):
         if not node.state.get_actions():
             continue
         
-        print("current leaf:")
-        print([node_print.state.__str__() for node_print in leaf])
         update_visited_times(node, visited, visited_times)
         visited.add(node.state.__str__())
 
-        print("Nodos visitados " ,visited)
+        # print("Nodos visitados " ,visited)
         new_nodes = node.expand(problem)
         if(visited_times[node.state.__str__()] > 1):
             if (node.best_child != None):
-                print("Acá estoy x1")
                 
                 remove_node(new_nodes, node.best_child)
                 nodes_best_child = node.best_child.expand(problem)
                 add_nodes(nodes_best_child, new_nodes, visited)
 
-        print("hijos ese nodo")
+
         print([new_node.state.__str__() for new_node in new_nodes])
         update_leaf(node, new_nodes, leaf, visited, visited_times)
+
+        print("Leaf momento: ")
+        print([node.state.__str__() for node in leaf])
         ordering_leaf(leaf)
-        print("ordered leaf:")
-        print([node_print.state.__str__() for node_print in leaf])
+        print([node.state.__str__() for node in leaf])
+        print("Costos del leaf: ")
+        print([node.cost for node in leaf])
 
 
 #Decides how to update new nodes to the leaf based on two conditions:
@@ -53,7 +54,7 @@ def update_leaf(current_node,nodes, leaf, visited, visited_times):
         return
     next_node = leaf[0]
     if(should_forget_branch(next_node,nodes) and visited_times[current_node.state.__str__()] <= 1):
-        print("Entré")
+        print("Estoy acá")
         current_node.calculate_best_child_cost()
         current_node.cost = current_node.best_child.original_cost
         current_node.children = []
@@ -73,7 +74,7 @@ def add_nodes(new_nodes, nodes, visited):
 def should_forget_branch(next_node, nodes):
     decision = False
     for node in nodes:
-        if node.cost >= next_node.cost:
+        if node.cost > next_node.cost:
             decision = True
             break
     return decision
