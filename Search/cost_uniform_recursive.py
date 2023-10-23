@@ -26,11 +26,11 @@ def cost_uniform_recursive(problem):
         update_visited_times(node, visited, visited_times)
         visited.add(node.state.__str__())
 
-        # print("Nodos visitados " ,visited)
+        print("Nodos visitados " ,visited)
         new_nodes = node.expand(problem)
         if(visited_times[node.state.__str__()] > 1):
             if (node.best_child != None):
-                
+                visited.add(node.best_child.state.__str__())
                 remove_node(new_nodes, node.best_child)
                 nodes_best_child = node.best_child.expand(problem)
                 add_nodes(nodes_best_child, new_nodes, visited)
@@ -39,12 +39,9 @@ def cost_uniform_recursive(problem):
         print([new_node.state.__str__() for new_node in new_nodes])
         update_leaf(node, new_nodes, leaf, visited, visited_times)
 
-        print("Leaf momento: ")
+        print("Leaf ahora mismo: ")
         print([node.state.__str__() for node in leaf])
         ordering_leaf(leaf)
-        print([node.state.__str__() for node in leaf])
-        print("Costos del leaf: ")
-        print([node.cost for node in leaf])
 
 
 #Decides how to update new nodes to the leaf based on two conditions:
@@ -54,7 +51,6 @@ def update_leaf(current_node,nodes, leaf, visited, visited_times):
         return
     next_node = leaf[0]
     if(should_forget_branch(next_node,nodes) and visited_times[current_node.state.__str__()] <= 1):
-        print("Estoy acá")
         current_node.calculate_best_child_cost()
         current_node.cost = current_node.best_child.original_cost
         current_node.children = []
@@ -123,6 +119,35 @@ def show_solution(goal):
 
     for step in reversed(solution_path):
         print(step)
+
+
+#Returns a dictionary with a tuple of the coordinates of the next position of the dog cobarde.
+def steps_solution(goal):
+    if not goal:
+        print('There is not solution')
+        return
+    
+    number_step = 0
+    steps = {}
+    node = goal
+    while node:
+        state = node.state
+        steps[number_step] = [state.row, state.column]
+        number_step+=1
+        node = node.father
+    
+    return traverse_steps(steps)
+
+
+def traverse_steps(steps):
+    number_step = 0
+    traverse_steps = {}
+    size_steps = len(steps) - 1
+    for step in range(size_steps, -1, -1):
+        traverse_steps[number_step] = steps[step]
+        number_step+=1
+    
+    return traverse_steps
 
 
 #Orders a list of nodes in place based on their 'cost' attribute.
