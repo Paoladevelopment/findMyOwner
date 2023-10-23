@@ -21,7 +21,7 @@ INFO_ENTITIES = {
     2: "Abusador amo",
     3: "Gato malvado",
     4: "Muriel",
-    5: "Obstaculo"
+    5: "Obstaculo",
 }
 
 INFO_ENTITIES_IMAGES = {
@@ -31,4 +31,7 @@ INFO_ENTITIES_IMAGES = {
     3: "findMyOwner\Images\katz.png",
     4: "findMyOwner\Images\muriel.png",
     5: "findMyOwner\Images/black.jpg",
+    6: "findMyOwner\Images/abusadorEfecto.jpg",
+    7: "findMyOwner\Images\katzEfecto.jpg",
+    8: "findMyOwner\Images\murielEfecto.jpg"
 }
