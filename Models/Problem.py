@@ -2,11 +2,12 @@ from Models.State import State
 
 class Problem:
 
-    def __init__(self, initial_state, goal_state, actions, enviroment) -> None:
+    def __init__(self, initial_state, goal_state, actions, enviroment, costs) -> None:
         self.initial_state = initial_state
         self.goal_state = goal_state
         self.actions = actions
         self.enviroment = enviroment
+        self.costs = costs
 
         self.initial_state.set_actions(self._get_allowed_actions(self.initial_state))
     
@@ -65,3 +66,15 @@ class Problem:
                 allowed_actions.append(self.actions[3])
         
         return allowed_actions
+    
+    #Returns the cost of the current state, how much did it take to get to the current state.
+    def cost_action(self, state):
+        return self.costs[self.enviroment[state.row][state.column]]
+
+    #Returns the cost of the road from the current node to its root node
+    def cost_road(self, node):
+        total = 0
+        while node.father:
+            total += self.cost_action(node.state)
+            node = node.father
+        return total
