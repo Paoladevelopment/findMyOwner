@@ -1,14 +1,17 @@
 import tkinter as tk
 from PIL import ImageTk, Image
+import copy
 
-from Constants.generalConstants import INFO_ENTITIES_IMAGES
 
 class GameBoardApp:
-    def __init__(self, root, game_board, info_entities_images):
+    def __init__(
+        self, root, game_board, game_positions, info_entities_images, info_entities
+    ):
         self.root = root
         self.game_board = game_board
         self.info_entities_images = info_entities_images
-
+        self.info_entities = info_entities
+        self.game_positions = game_positions
         self.cells = []
         self.step = 0
 
@@ -59,10 +62,39 @@ class GameBoardApp:
                 cell_label.grid(row=i, column=j)
 
     def update_step(self):
-        if self.step < len(self.ALL_STEPS):
-            self.update_board(self.ALL_STEPS[self.step])
+        if self.step < len(self.game_positions):
+            new_board = copy.deepcopy(self.game_board)
+            positions = self.game_positions
+
+            new_position = positions[self.step]
+            current_value = new_board[new_position[0]][new_position[1]]
+
+            value_mapping = {2: (6, 2), 3: (7, 3), 4: (8, 4)}
+            if current_value in value_mapping:
+                new_value, condition_value = value_mapping[current_value]
+                new_board[new_position[0]][new_position[1]] = new_value
+                if self.step - 1 and not any(
+                    new_board[positions[self.step - 1][0]][positions[self.step - 1][1]]
+                    == val
+                    for val in (condition_value, 3, 4)
+                ):
+                    new_board[positions[self.step - 1][0]][
+                        positions[self.step - 1][1]
+                    ] = 1
+            if current_value == 1:
+                new_board[new_position[0]][new_position[1]] = 0
+                if self.step - 1 and not any(
+                    new_board[positions[self.step - 1][0]][positions[self.step - 1][1]]
+                    == val
+                    for val in (2, 3, 4)
+                ):
+                    new_board[positions[self.step - 1][0]][
+                        positions[self.step - 1][1]
+                    ] = 1
+                    
+            self.update_board(new_board)
             self.step += 1
-            self.root.after(1000, self.update_step)
+            self.root.after(500, self.update_step)
 
     def start_travel(self):
         self.step = 0
