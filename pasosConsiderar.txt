@@ -1,0 +1,15 @@
+Orden ejecución proyecto:
+1) Estructura de datos para la definición de un problema.
+Un problema se define por: estado inicial, acciones, esObjetivo?, costo, estados (todos los posibles)
+Representación nodos:
+-estado
+-nodo padre
+-acción: la que se aplicó al nodo padre para generar este estado
+-costo del camino
+-profundidad
+busqueda(problema) -> secuencia de acciones
+
+
+En el caso del proyecto las acciones y estados que se consideran
+para llegar a una meta es:
+1) acciones, ir arriba, ir a la izquierda, ir abajo e ir a la derecha.
