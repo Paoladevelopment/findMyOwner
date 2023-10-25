@@ -1,1 +1,5 @@
-__pycache__/
+Constants/__pycache__/
+Enums/__pycache__/
+Models/__pycache__/
+Search/__pycache__/
+View/__pycache__/

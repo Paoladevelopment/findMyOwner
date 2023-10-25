@@ -11,7 +11,7 @@ def cost_uniform_recursive(problem):
     leaf = [node_root]
     visited = set()
     visited_times = {}
-    for i in range(43):
+    while True:
 
         if not leaf:
             return None
@@ -30,17 +30,14 @@ def cost_uniform_recursive(problem):
         new_nodes = node.expand(problem)
         if(visited_times[node.state.__str__()] > 1):
             if (node.best_child != None):
-                visited.add(node.best_child.state.__str__())
                 remove_node(new_nodes, node.best_child)
                 nodes_best_child = node.best_child.expand(problem)
                 add_nodes(nodes_best_child, new_nodes, visited)
 
-
+        print("Hijos nodos")
         print([new_node.state.__str__() for new_node in new_nodes])
         update_leaf(node, new_nodes, leaf, visited, visited_times)
 
-        print("Leaf ahora mismo: ")
-        print([node.state.__str__() for node in leaf])
         ordering_leaf(leaf)
 
 
