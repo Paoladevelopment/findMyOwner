@@ -35,7 +35,6 @@ INFO_ENTITIES = {
 }
 
 
-"""
 INFO_ENTITIES_IMAGES = {
     0: "findMyOwner\Images\zombieMap.jpg",
     1: "findMyOwner\Images\greenMap.jpg",
@@ -48,16 +47,15 @@ INFO_ENTITIES_IMAGES = {
     8: "findMyOwner\Images\zombieWonMap.jpg"
 }
 
-"""
 
-INFO_ENTITIES_IMAGES = {
-    0: r"D:\Proyecto 1 IA\Images\zombieMap.jpg",
-    1: r"D:\Proyecto 1 IA\Images\greenMap.jpg",
-    2: r"D:\Proyecto 1 IA\Images\sunflowerMap.jpg",
-    3: r"D:\Proyecto 1 IA\Images\papapumMap.jpg",
-    4: r"D:\Proyecto 1 IA\Images\brainMap.jpg",
-    5: r"D:\Proyecto 1 IA\Images\waterMap.jpg",
-    6: r"D:\Proyecto 1 IA\Images\zombieEatMap.jpg",
-    7: r"D:\Proyecto 1 IA\Images\zombieBurnedMap.jpg",
-    8: r"D:\Proyecto 1 IA\Images\zombieWonMap.jpg"
-}
+# INFO_ENTITIES_IMAGES = {
+#     0: r"D:\Proyecto 1 IA\Images\zombieMap.jpg",
+#     1: r"D:\Proyecto 1 IA\Images\greenMap.jpg",
+#     2: r"D:\Proyecto 1 IA\Images\sunflowerMap.jpg",
+#     3: r"D:\Proyecto 1 IA\Images\papapumMap.jpg",
+#     4: r"D:\Proyecto 1 IA\Images\brainMap.jpg",
+#     5: r"D:\Proyecto 1 IA\Images\waterMap.jpg",
+#     6: r"D:\Proyecto 1 IA\Images\zombieEatMap.jpg",
+#     7: r"D:\Proyecto 1 IA\Images\zombieBurnedMap.jpg",
+#     8: r"D:\Proyecto 1 IA\Images\zombieWonMap.jpg"
+# }
