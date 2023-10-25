@@ -25,13 +25,13 @@ INFO_ENTITIES = {
 }
 
 INFO_ENTITIES_IMAGES = {
-    0: "findMyOwner\Images\perroCobarde.png",
-    1: "findMyOwner\Images\white.jpg",
-    2: "findMyOwner\Images/abusadorAmo.png",
-    3: "findMyOwner\Images\katz.png",
-    4: "findMyOwner\Images\muriel.png",
-    5: "findMyOwner\Images/black.jpg",
-    6: "findMyOwner\Images/abusadorEfecto.jpg",
-    7: "findMyOwner\Images\katzEfecto.jpg",
-    8: "findMyOwner\Images\murielEfecto.jpg"
+    0: "findMyOwner\Images\zombieMap.jpg",
+    1: "findMyOwner\Images\greenMap.jpg",
+    2: "findMyOwner\Images/sunflowerMap.jpg",
+    3: "findMyOwner\Images\papapumMap.jpg",
+    4: "findMyOwner\Images/brainMap.jpg",
+    5: "findMyOwner\Images/waterMap.jpg",
+    6: "findMyOwner\Images/zombieEatMap.jpg",
+    7: "findMyOwner\Images\zombieBurnedMap.jpg",
+    8: "findMyOwner\Images\zombieWonMap.jpg"
 }
