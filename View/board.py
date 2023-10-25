@@ -66,15 +66,17 @@ class GameBoardApp:
             new_board = copy.deepcopy(self.game_board)
             positions = self.game_positions
             time = 250
-
+            started_location = positions[0]
             new_position = positions[self.step]
             current_value = new_board[new_position[0]][new_position[1]]
 
             value_mapping = {2: (6, 2), 3: (7, 3), 4: (8, 4)}
+            if self.step > 0:
+                new_board[positions[0][0]][positions[0][1]] = 1
             if current_value in value_mapping:
                 new_value, condition_value = value_mapping[current_value]
                 new_board[new_position[0]][new_position[1]] = new_value
-                time = 500
+                time = 1000
                 if self.step - 1 and not any(
                     new_board[positions[self.step - 1][0]][positions[self.step - 1][1]]
                     == val
