@@ -35,6 +35,14 @@ positions = {
     15: [2, 0]
 }
 
+initial_state = State(2, 7, [])
+goal_state = State(2, 0, [])
+problem = Problem(initial_state, goal_state, LIST_ACTIONS, game_board, COSTS)
+solution = cu.cost_uniform_recursive(problem)
+print(solution.state.__str__())
+cu.show_solution(solution)
+print(cu.steps_solution(solution))
+
 root = tk.Tk()
 root.title("New Board")
 
