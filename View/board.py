@@ -18,12 +18,15 @@ class GameBoardApp:
         self.create_game_board()
 
     def create_game_board(self):
+        image_size = 100
+        if len(self.game_board) > 6:
+            image_size = 50
         for i in range(len(self.game_board)):
             row = []
             for j in range(len(self.game_board[i])):
                 cell_value = self.game_board[i][j]
                 original_image = Image.open(self.info_entities_images[cell_value])
-                resized_image = original_image.resize((100, 100))
+                resized_image = original_image.resize((image_size, image_size))
                 img = ImageTk.PhotoImage(resized_image)
                 cell_label = tk.Label(
                     self.root,
@@ -39,15 +42,24 @@ class GameBoardApp:
                 row.append(cell_label)
             self.cells.append(row)
 
-        update_button = tk.Button(self.root, text="Start", command=self.start_travel)
+        update_button = tk.Button(self.root, text="Cerebro!", command=self.start_travel)
+        update_button.configure(bg="green", fg="white")
+
+        button_font = ("Helvetica", 12)
+        update_button.configure(font=button_font)
+
+        update_button.configure(relief="raised")
         update_button.grid(row=len(self.game_board), columnspan=len(self.game_board[0]))
 
     def update_board(self, new_board):
+        image_size = 100
+        if len(self.game_board) > 6:
+            image_size = 50
         for i in range(len(new_board)):
             for j in range(len(new_board[i])):
                 cell_value = new_board[i][j]
                 original_image = Image.open(self.info_entities_images[cell_value])
-                resized_image = original_image.resize((100, 100))
+                resized_image = original_image.resize((image_size, image_size))
                 img = ImageTk.PhotoImage(resized_image)
                 cell_label = tk.Label(
                     self.root,
@@ -66,7 +78,6 @@ class GameBoardApp:
             new_board = copy.deepcopy(self.game_board)
             positions = self.game_positions
             time = 250
-            started_location = positions[0]
             new_position = positions[self.step]
             current_value = new_board[new_position[0]][new_position[1]]
 
