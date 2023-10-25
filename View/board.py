@@ -20,7 +20,7 @@ class GameBoardApp:
     def create_game_board(self):
         image_size = 100
         if len(self.game_board) > 6:
-            image_size = 50
+            image_size = 60
         for i in range(len(self.game_board)):
             row = []
             for j in range(len(self.game_board[i])):
@@ -54,7 +54,7 @@ class GameBoardApp:
     def update_board(self, new_board):
         image_size = 100
         if len(self.game_board) > 6:
-            image_size = 50
+            image_size = 60
         for i in range(len(new_board)):
             for j in range(len(new_board[i])):
                 cell_value = new_board[i][j]
