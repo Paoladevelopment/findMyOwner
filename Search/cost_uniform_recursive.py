@@ -16,7 +16,7 @@ def cost_uniform_recursive(problem):
         if not leaf:
             return None
         node = leaf.pop(0)
-        print("current state ", node.state.__str__())
+     
         if problem.is_goal(node.state):
             return node
 
@@ -26,16 +26,13 @@ def cost_uniform_recursive(problem):
         update_visited_times(node, visited, visited_times)
         visited.add(node.state.__str__())
 
-        print("Nodos visitados " ,visited)
+
         new_nodes = node.expand(problem)
         if(visited_times[node.state.__str__()] > 1):
             if (node.best_child != None):
-                remove_node(new_nodes, node.best_child)
                 nodes_best_child = node.best_child.expand(problem)
                 add_nodes(nodes_best_child, new_nodes, visited)
 
-        print("Hijos nodos")
-        print([new_node.state.__str__() for new_node in new_nodes])
         update_leaf(node, new_nodes, leaf, visited, visited_times)
 
         ordering_leaf(leaf)
@@ -47,8 +44,17 @@ def update_leaf(current_node,nodes, leaf, visited, visited_times):
         add_nodes(nodes, leaf, visited)
         return
     next_node = leaf[0]
+    
     if(should_forget_branch(next_node,nodes) and visited_times[current_node.state.__str__()] <= 1):
-        current_node.calculate_best_child_cost()
+        best_child = None
+        for _ in nodes:
+            current_node.calculate_best_child_cost()
+            best_child =  current_node.best_child
+            if(was_visited(best_child, visited)):
+                remove_node(current_node.children, current_node.best_child)
+                current_node.calculate_best_child_cost()
+                best_child =  current_node.best_child
+
         current_node.cost = current_node.best_child.original_cost
         current_node.children = []
         leaf.append(current_node)
@@ -87,11 +93,11 @@ def update_visited_times(node, visited, visited_times):
 
 #Removes a node from the recent created new nodes list
 
-def remove_node(new_nodes, node_to_delete):
+def remove_node(nodes, node_to_delete):
 
-    for node in new_nodes:
+    for node in nodes:
         if node_to_delete.state.__str__() == node.state.__str__():
-            new_nodes.remove(node)
+            nodes.remove(node)
 
 
 # Show the solution that el perro cobarde should take to find his owner

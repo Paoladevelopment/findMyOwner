@@ -1,6 +1,5 @@
 from Enums.Actions import Actions
 
-
 #Used to save the probability of ocurrence when genereting the random board
 PROBABILITIES = {
         1: 0.4,
@@ -8,7 +7,6 @@ PROBABILITIES = {
         3: 0.15,
         5: 0.3
     }
-
 
 LIST_ACTIONS = {
     0: Actions.GO_UP,
@@ -51,13 +49,13 @@ INFO_ENTITIES_IMAGES = {
 """
 
 INFO_ENTITIES_IMAGES = {
-    0: r"D:\Proyecto 1 IA\Images\zombieMap.jpg",
-    1: r"D:\Proyecto 1 IA\Images\greenMap.jpg",
-    2: r"D:\Proyecto 1 IA\Images\sunflowerMap.jpg",
-    3: r"D:\Proyecto 1 IA\Images\papapumMap.jpg",
-    4: r"D:\Proyecto 1 IA\Images\brainMap.jpg",
-    5: r"D:\Proyecto 1 IA\Images\waterMap.jpg",
-    6: r"D:\Proyecto 1 IA\Images\zombieEatMap.jpg",
-    7: r"D:\Proyecto 1 IA\Images\zombieBurnedMap.jpg",
-    8: r"D:\Proyecto 1 IA\Images\zombieWonMap.jpg"
+    0: r"E:\Universidad\IA\findMyOwner\Images\zombieMap.jpg",
+    1: r"E:\Universidad\IA\findMyOwner\Images\greenMap.jpg",
+    2: r"E:\Universidad\IA\findMyOwner\Images\sunflowerMap.jpg",
+    3: r"E:\Universidad\IA\findMyOwner\Images\papapumMap.jpg",
+    4: r"E:\Universidad\IA\findMyOwner\Images\brainMap.jpg",
+    5: r"E:\Universidad\IA\findMyOwner\Images\waterMap.jpg",
+    6: r"E:\Universidad\IA\findMyOwner\Images\zombieEatMap.jpg",
+    7: r"E:\Universidad\IA\findMyOwner\Images\zombieBurnedMap.jpg",
+    8: r"E:\Universidad\IA\findMyOwner\Images\zombieWonMap.jpg"
 }
