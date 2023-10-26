@@ -18,12 +18,15 @@ class GameBoardApp:
         self.create_game_board()
 
     def create_game_board(self):
+        image_size = 100
+        if len(self.game_board) > 6:
+            image_size = 60
         for i in range(len(self.game_board)):
             row = []
             for j in range(len(self.game_board[i])):
                 cell_value = self.game_board[i][j]
                 original_image = Image.open(self.info_entities_images[cell_value])
-                resized_image = original_image.resize((100, 100))
+                resized_image = original_image.resize((image_size, image_size))
                 img = ImageTk.PhotoImage(resized_image)
                 cell_label = tk.Label(
                     self.root,
@@ -43,11 +46,14 @@ class GameBoardApp:
         update_button.grid(row=len(self.game_board), columnspan=len(self.game_board[0]))
 
     def update_board(self, new_board):
+        image_size = 100
+        if len(self.game_board) > 6:
+            image_size = 60
         for i in range(len(new_board)):
             for j in range(len(new_board[i])):
                 cell_value = new_board[i][j]
                 original_image = Image.open(self.info_entities_images[cell_value])
-                resized_image = original_image.resize((100, 100))
+                resized_image = original_image.resize((image_size, image_size))
                 img = ImageTk.PhotoImage(resized_image)
                 cell_label = tk.Label(
                     self.root,
