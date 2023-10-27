@@ -52,8 +52,6 @@ def update_leaf(current_node,nodes, leaf, visited, visited_times):
             best_child =  current_node.best_child
             if(was_visited(best_child, visited)):
                 remove_node(current_node.children, current_node.best_child)
-                current_node.calculate_best_child_cost()
-                best_child =  current_node.best_child
 
         current_node.cost = current_node.best_child.original_cost
         current_node.children = []
